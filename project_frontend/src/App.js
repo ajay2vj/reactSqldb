@@ -28,6 +28,8 @@ import AttandanceStudent from './component/student/StudentAttandance';
 import AttandanceStudentReport from './component/student/studentreport';
 import StudentPassword from './component/student/changeStudentPassword';
 import AdminPassword from './component/login/changeAdminPassword'
+import Student from './pages/student';
+import StudentAdd from './pages/student/addStudent';
 function App() {
   const logout =()=>{
     localStorage.removeItem("userinfo");
@@ -63,6 +65,8 @@ return (
          <Route path="/student/attandancesummary"component={  AttandanceStudentReport}/>
          <Route path="/student/changepassword"component={StudentPassword}/>
          <Route path="/admin/changepassword"component={AdminPassword}/>
+         <Route path="/student-list"component={Student}/>
+         <Route path="/student-add"component={StudentAdd}/>
          <Route path="*" component={NotFound} />
     </Switch> 
       

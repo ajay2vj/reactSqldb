@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ReactJsCoreApi\\WebAPI\\WebAPI\\WebAPI.csproj": {}
+    "D:\\react-sqldb\\WebAPI\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "D:\\ReactJsCoreApi\\WebAPI\\WebAPI\\WebAPI.csproj": {
+    "D:\\react-sqldb\\WebAPI\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ReactJsCoreApi\\WebAPI\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "D:\\react-sqldb\\WebAPI\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "D:\\ReactJsCoreApi\\WebAPI\\WebAPI\\WebAPI.csproj",
+        "projectPath": "D:\\react-sqldb\\WebAPI\\WebAPI\\WebAPI.csproj",
         "packagesPath": "C:\\Users\\Ajay\\.nuget\\packages\\",
-        "outputPath": "D:\\ReactJsCoreApi\\WebAPI\\WebAPI\\obj\\",
+        "outputPath": "D:\\react-sqldb\\WebAPI\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ajay\\AppData\\Roaming\\NuGet\\NuGet.Config",

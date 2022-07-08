@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pnQ/MAk0+kN1aEMn4G0qVN+hjxqotBYzx1QkZNaVZ/Z4/eGb35U2ppPNTclF+1b0f9ydlndb22o5ez4wVX/Pag==",
+  "dgSpecHash": "Y9f/QLjzG660N3O/AZBhAlk7ZiX03UGj3PsvaQZbnsc7EVEs2NaOk6mZYE3MbVYVP2GeO6jXWB/GATPRt/CyYQ==",
   "success": true,
-  "projectFilePath": "D:\\ReactJsCoreApi\\WebAPI\\WebAPI\\WebAPI.csproj",
+  "projectFilePath": "D:\\react-sqldb\\WebAPI\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ajay\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.9\\microsoft.aspnetcore.jsonpatch.3.1.9.nupkg.sha512",
     "C:\\Users\\Ajay\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\3.1.9\\microsoft.aspnetcore.mvc.newtonsoftjson.3.1.9.nupkg.sha512",
