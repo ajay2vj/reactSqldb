@@ -1,2 +1,2 @@
-# ReactJsCoreApi
+# ReactJs and mySQL project
  
