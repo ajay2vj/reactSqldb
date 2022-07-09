@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import axios from 'axios'
 import { Button, Popconfirm, Table } from 'antd'
 import { Link } from 'react-router-dom'
@@ -18,14 +18,16 @@ export default function Student(){
     })
     const dataList = res?.data?.map((item, index)=>({
       studentName: item?.StudentName,
-      rollNumber: item?.RollNumber,
+      gender: item?.Gender,
+      dob: item?.DOB,
+      fName: item?.FatherName,
       mobile: item?.Mobile,
-      dept: item?.Dept,
-      Id: item?.id
+      email: item?.Email,
+      Id: item?.Id
     }))
     return dataList;
   }
-  const {data} = useQuery('fetchStudentList', fetchStudentList)
+  const { data } = useQuery('fetchStudentList', fetchStudentList)
   async function deleteAPI(id) {
     return fetch(`http://localhost:53535/api/AddStudent/${id}`, {
       method: 'DELETE',
@@ -46,16 +48,24 @@ export default function Student(){
       dataIndex: 'studentName',
     },
     {
-      title: 'Roll Number',
-      dataIndex: 'rollNumber',
+      title: 'Gender',
+      dataIndex: 'gender',
+    },
+    {
+      title: 'DOB',
+      dataIndex: 'dob',
+    },
+    {
+      title: 'Father Name',
+      dataIndex: 'fName',
     },
     {
       title: 'Mobile',
       dataIndex: 'mobile',
     },
     {
-      title: 'Dept',
-      dataIndex: 'dept',
+      title: 'Email',
+      dataIndex: 'email',
     },
     {
       title: 'Action',

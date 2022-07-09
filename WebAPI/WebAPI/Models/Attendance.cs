@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class Fees
+    public class Attendance
     {
 
-        
-        public string FeeAmount { get; set; }
+
+        public string Atdate { get; set; }
         public string Status { get; set; }
         public int Sid { get; set; }
 

@@ -13,11 +13,11 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddStudent : ControllerBase
+    public class StudentAttendance : ControllerBase
     {
         private readonly IConfiguration _configuration;
 
-        public AddStudent(IConfiguration configuration)
+        public StudentAttendance(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select Id, StudentName, Gender, DOB, FatherName, Mobile, Email, Address, Pincode, Classes, Admissiondate, FeeAmount, Passcode from dbo.studentDetails";
+                    select Atdate, Status, Sid from dbo.studentAttendance";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -48,38 +48,10 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
-        public JsonResult Post(Student dep)
+        public JsonResult Post(Attendance dep)
         {
             string query = @"
-                    insert into dbo.studentDetails
-                    (
-                        StudentName, 
-                        Gender, 
-                        DOB,
-                        FatherName,
-                        Mobile,
-                        Email,
-                        Address,
-                        Pincode,
-                        Classes,
-                        Admissiondate,
-                        FeeAmount,
-                        Passcode
-                    ) values
-                        (
-                            '" + dep.StudentName + @"', 
-                            '" + dep.Gender + @"', 
-                            '" + dep.DOB + @"', 
-                            '" + dep.Fathername + @"',
-                            '" + dep.Mobile + @"',
-                            '" + dep.Email + @"',
-                            '" + dep.Address + @"',
-                            '" + dep.Pincode + @"',
-                            '" + dep.Classes + @"',
-                            '" + dep.Admissiondate + @"',
-                            '" + dep.FeeAmount + @"',
-                            '" + dep.Passcode + @"'
-                        )";
+                    insert into dbo.studentAttendance(Atdate, Status) values('" + dep.Atdate + @"', '" + dep.Status + @"')";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -101,23 +73,13 @@ namespace WebAPI.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(Student dep)
+        public JsonResult Put(Attendance dep)
         {
             string query = @"
-                    update dbo.studentDetails set 
-                    StudentName = '"+dep.StudentName + @"',
-                    Gender = '" + dep.Gender + @"',
-                    DOB = '" + dep.DOB + @"',
-                    FatherName = '" + dep.Fathername + @"',
-                    Mobile = '" + dep.Mobile + @"',
-                    Email = '" + dep.Email + @"',
-                    Address = '" + dep.Address + @"',
-                    Pincode = '" + dep.Pincode + @"',
-                    Classes = '" + dep.Classes + @"',
-                    Admissiondate = '" + dep.Admissiondate + @"',
-                    FeeAmount = '" + dep.FeeAmount + @"',
-                    Passcode = '" + dep.Passcode + @"',
-                    where Id = " + dep.Id + @" 
+                    update dbo.studentAttendance set 
+                    Atdate = '" + dep.Atdate + @"',
+                    Status = '" + dep.Status + @"'
+                    where Sid = " + dep.Sid + @"
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
@@ -143,8 +105,8 @@ namespace WebAPI.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                    delete from dbo.studentDetails
-                    where Id = " + id + @" 
+                    delete from dbo.studentAttendance
+                    where Sid = " + id + @" 
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
