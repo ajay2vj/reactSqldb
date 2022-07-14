@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 import { Button, Popconfirm, Table } from 'antd'
-import { Link } from 'react-router-dom'
 import { useQuery, useQueryClient } from 'react-query'
+import { Redirect } from 'react-router-dom'
 
 export default function Student(){
   const queryClient = useQueryClient()
@@ -78,18 +78,12 @@ export default function Student(){
       ) : null,
     },
   ];
+  if(!localStorage.getItem("user")){
+    alert("please login first")
+    return( <Redirect to="/"/> )
+  }
   return(
     <div className='p-20'>
-      <div className='flex justify-between'>
-        <h3>Student List</h3>
-        <Button 
-          type="primary" 
-          className='mb-2'
-          onClick={()=> {}}
-        >
-          <Link to={'student-add'}>Add</Link>
-        </Button>
-      </div>
       <Table
         // rowSelection={{
         //   type: selectionType,

@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import studentService from '../../services/studentservice';
-import resultService from '../../services/resultservice';
-import attandanceService from '../../services/attandanceservice';
-import  swal from 'sweetalert';
+// import resultService from '../../services/resultservice';
+// import attandanceService from '../../services/attandanceservice';
+// import  swal from 'sweetalert';
 import {Redirect} from "react-router-dom";
+import Student from '../../pages/student';
 const StudentList = () => {
 
-  const [student, setStudent] = useState([]);
+  // const [student, setStudent] = useState([]);
   const logout =()=>{
     localStorage.removeItem("user");
     localStorage.removeItem("tokenSuccess");
@@ -16,7 +17,7 @@ const StudentList = () => {
     studentService.getAll()
       .then(response => {
         console.log('Printing student data', response.data);
-        setStudent(response.data);
+        // setStudent(response.data);
       })
       .catch(error => {
         console.log('Something went wrong', error);
@@ -30,55 +31,55 @@ const StudentList = () => {
     init();
   }, []);
 
-  const handleDelete = (id) => {
-    console.log('Printing id', id);
-   // if(window.confirm('are you sure want to delete'))
-    studentService.remove(id)
-      .then(response => {
-        console.log('student deleted successfully', response.data);
-        init();
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      })
-  }
+  // const handleDelete = (id) => {
+  //   console.log('Printing id', id);
+  //  // if(window.confirm('are you sure want to delete'))
+  //   studentService.remove(id)
+  //     .then(response => {
+  //       console.log('student deleted successfully', response.data);
+  //       init();
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     })
+  // }
 
-  const updatestatus = (id) => {
-    console.log('Printing id', id);
-    if(window.confirm('are you sure want to update status="inactive"'))
-    studentService.updatestatus(id)
-      .then(response => {
-        console.log('student status change to inactive successfully', response.data);
-        init();
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      })
-  }
-  const handleDelete1 = (id) => {
-    console.log('Printing data', id);
-    //if(window.confirm('are you sure want to delete'))
-    resultService.removesid(id)
-      .then(response => {
-        console.log('student deleted successfully', response.data);
-        init();
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      })
-  }
-  const handleDelete2 = (id) => {
-    console.log('Printing data', id);
-    //if(window.confirm('are you sure want to delete'))
-    attandanceService.removesid(id)
-      .then(response => {
-        console.log('student deleted successfully', response.data);
-        init();
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      })
-  }
+  // const updatestatus = (id) => {
+  //   console.log('Printing id', id);
+  //   if(window.confirm('are you sure want to update status="inactive"'))
+  //   studentService.updatestatus(id)
+  //     .then(response => {
+  //       console.log('student status change to inactive successfully', response.data);
+  //       init();
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     })
+  // }
+  // const handleDelete1 = (id) => {
+  //   console.log('Printing data', id);
+  //   //if(window.confirm('are you sure want to delete'))
+  //   resultService.removesid(id)
+  //     .then(response => {
+  //       console.log('student deleted successfully', response.data);
+  //       init();
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     })
+  // }
+  // const handleDelete2 = (id) => {
+  //   console.log('Printing data', id);
+  //   //if(window.confirm('are you sure want to delete'))
+  //   attandanceService.removesid(id)
+  //     .then(response => {
+  //       console.log('student deleted successfully', response.data);
+  //       init();
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     })
+  // }
   if(!localStorage.getItem("user")){
     alert("please login first")
     return( <Redirect to="/"/> )
@@ -90,12 +91,13 @@ const StudentList = () => {
       <h2 align="center">List of Students</h2>
       <hr/>
       <div>
-        <Link to="/admin/add" className="btn btn-primary mb-2">Add Student</Link>{' '}
+        <Link to="/student-add" className="btn btn-primary mb-2">Add Student</Link>{' '}
         <Link to="/admin/viewtransfer" className="btn btn-info mb-2">View transfer Student </Link>{' '}
-        <Link to="/admin/addattandance" className="btn btn-primary mb-2">Student Attandance</Link>{' '}
+        <Link to="/student-attendance" className="btn btn-primary mb-2">Student Attandance</Link>{' '}
+        <Link to="/student-fee" className="btn btn-primary mb-2">Student Fees</Link>{' '}
         <Link to="/admin/changepassword" className="btn btn-info mb-2">Change Password</Link>{' '}
         <Link to="/"onClick={logout} className="btn btn-primary mb-2">logout</Link>
-        <table className="table table-bordered table-striped">
+        {/* <table className="table table-bordered table-striped">
           <thead className="thead-dark" >
             <tr>
               <th>sid</th>
@@ -139,8 +141,8 @@ const StudentList = () => {
             ))
           }
           </tbody>
-        </table>
-        
+        </table> */}
+        <Student />
       </div>
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { Button, Row, Col, Form, Input, DatePicker } from 'antd';
+import { Button, Row, Col, Form, Input } from 'antd';
 import { useQueryClient } from 'react-query'
 import { useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export default function AddFees(){
     const [FeeAmount, setFeeAmount] = useState();
@@ -32,6 +33,11 @@ export default function AddFees(){
          history.push('/student-fee');
       }
    }
+
+   if(!localStorage.getItem("user")){
+    alert("please login first")
+    return( <Redirect to="/"/> )
+  }
   
   return(
     <div className='p-20'>
@@ -61,8 +67,13 @@ export default function AddFees(){
                 onChange={(e)=> setStatus(e.target.value)}
               />
             </Form.Item>
-            <Form.Item
-            >
+            <div className='flex gap-4'>
+              <Button 
+                type="primary" 
+                className='mb-2'
+                onClick={()=> history.goBack()}
+              >Back
+              </Button>
               <Button 
                 type="primary" 
                 htmlType="submit"
@@ -70,7 +81,7 @@ export default function AddFees(){
               >
                 Submit
               </Button>
-            </Form.Item>
+            </div>
           </Form>
         </Col>
       </Row>

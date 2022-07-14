@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button, Row, Col, Form, Input, DatePicker } from 'antd';
 import moment from 'moment';
 import { useQueryClient } from 'react-query'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 export default function StudentAdd(){
     const [StudentName, setStudent] = useState();
@@ -50,7 +50,7 @@ export default function StudentAdd(){
       }finally{
          queryClient.invalidateQueries('fetchStudentList', { exact: true })
          // setVisible(false)
-         history.push('/student-list');
+         history.push('/admin/view');
       }
    }
   const dobChnage = (date) =>{
@@ -58,6 +58,11 @@ export default function StudentAdd(){
   }
   const adDateChnage = (date) =>{
     setAdDate(moment(date?._d).format('MM-YYYY-DD h:mm:ss a'));
+  }
+
+  if(!localStorage.getItem("user")){
+    alert("please login first")
+    return( <Redirect to="/"/> )
   }
   
   return(
@@ -153,8 +158,16 @@ export default function StudentAdd(){
               <Input.Password onChange={(e)=> setPasscode(e.target.value)}/>
             </Form.Item>
 
-            <Form.Item
+            <div
+              className='flex gap-4'
             >
+              <Button 
+                type="primary" 
+                htmlType="submit"
+                onClick={()=>history.goBack()}
+              >
+                Back
+              </Button>
               <Button 
                 type="primary" 
                 htmlType="submit"
@@ -162,7 +175,7 @@ export default function StudentAdd(){
               >
                 Submit
               </Button>
-            </Form.Item>
+            </div>
           </Form>
         </Col>
       </Row>

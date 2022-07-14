@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Row, Col, Form, Input, DatePicker } from 'antd';
 import { useQueryClient } from 'react-query'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import moment from 'moment';
 
 export default function AddAttendance(){
@@ -36,7 +36,10 @@ export default function AddAttendance(){
    const attendanceDate = (date) =>{
     setAtdate(moment(date?._d).format('MM-YYYY-DD h:mm:ss a'));
   }
-  
+  if(!localStorage.getItem("user")){
+    alert("please login first")
+    return( <Redirect to="/"/> )
+  }
   return(
     <div className='p-20'>
       <h3>Add Student Attendance</h3>
@@ -64,8 +67,13 @@ export default function AddAttendance(){
                 onChange={(e)=> setStatus(e.target.value)}
               />
             </Form.Item>
-            <Form.Item
-            >
+              <div className='flex gap-4'>
+              <Button 
+                type="primary" 
+                className='mb-2'
+                onClick={()=> history.goBack()}
+              >Back
+              </Button>
               <Button 
                 type="primary" 
                 htmlType="submit"
@@ -73,7 +81,7 @@ export default function AddAttendance(){
               >
                 Submit
               </Button>
-            </Form.Item>
+              </div>
           </Form>
         </Col>
       </Row>
