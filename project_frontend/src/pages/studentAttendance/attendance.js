@@ -67,7 +67,7 @@ export default function AddAttendance(){
                 onChange={(e)=> setStatus(e.target.value)}
               />
             </Form.Item>
-              <div className='flex gap-4'>
+            <div className='flex gap-4'>
               <Button 
                 type="primary" 
                 className='mb-2'
@@ -81,7 +81,7 @@ export default function AddAttendance(){
               >
                 Submit
               </Button>
-              </div>
+            </div>
           </Form>
         </Col>
       </Row>

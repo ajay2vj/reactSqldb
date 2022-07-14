@@ -84,6 +84,7 @@ export default function Student(){
   }
   return(
     <div className='p-20'>
+      
       <Table
         // rowSelection={{
         //   type: selectionType,
