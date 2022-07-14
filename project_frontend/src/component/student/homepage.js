@@ -13,6 +13,7 @@ export function Homepage() {
   
   const logout =()=>{
     localStorage.removeItem("sid");
+    localStorage.removeItem("tokenSuccess");
   }
   
   const init = () => {

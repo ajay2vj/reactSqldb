@@ -9,7 +9,8 @@ const StudentList = () => {
 
   const [student, setStudent] = useState([]);
   const logout =()=>{
-    localStorage.removeItem("userinfo");
+    localStorage.removeItem("user");
+    localStorage.removeItem("tokenSuccess");
   }
   const init = () => {
     studentService.getAll()
@@ -78,7 +79,7 @@ const StudentList = () => {
         console.log('Something went wrong', error);
       })
   }
-  if(!localStorage.getItem("userinfo")){
+  if(!localStorage.getItem("user")){
     alert("please login first")
     return( <Redirect to="/"/> )
 }

@@ -110,7 +110,7 @@ const[attandance,SetAttandance]=useState([]);
         }
         
 
-        if(!localStorage.getItem("userinfo")){
+        if(!localStorage.getItem("user")){
           alert("please login first")
           return( <Redirect to="/"/> )
       }

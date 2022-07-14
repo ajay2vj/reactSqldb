@@ -9,63 +9,44 @@ import  swal from 'sweetalert';
 
 const Signin = () =>{
     
-    const [sid , setSid] = useState('')
-    const [password , setPassword] = useState('')
+    const [Email, setUserEmail] = useState();
+    const [Password, setPassword] = useState();
 
     const history = useHistory()
     
 
  
-
-    const validateUser = () =>{
-        if(sid.length === 0){
-            alert("enter your Student Id")
+    async function loginUser(credentials) {
+        return fetch('http://localhost:53535/api/StudentLogin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(credentials)
+        })
+          .then(data => data.json())
+       }
+       const handleSubmit = async e => {
+        e.preventDefault();
+        const response = await loginUser({
+          Email,
+          Password
+        });
+        console.log(response)
+        if ('tokenSuccess' in response) {
+          swal("Success", response.result, "success", {
+            buttons: false,
+            timer: 2000,
+          })
+          .then((value) => {
+            localStorage.setItem('tokenSuccess', response['tokenSuccess']);
+            localStorage.setItem('sid', JSON.stringify(response['Sid']));
+            history.push('/student')
+          });
+        } else {
+          swal("Failed", response.result, "error");
         }
-        else if(password.length === 0){
-            alert("enter your password")
-        }
-        else{
-            const data = {
-                "sid":sid,
-                "password":password
-            }
-            axios.post("http://localhost:8080/api/student/login", data).then((response)=>{
-                console.log(data)
-                const result = response.data
-                console.log(result)
-                if(result.token === '123456'){
-                               
-                    swal({
-                        title: "Student "+result.name+" LoginSuccesfull",
-                        text: "You clicked the button!",
-                        icon: "success",
-                      });   
-                        localStorage.setItem("sid",result.sid)
-                        history.push('/student')
-
-                    }
-                })
-                    .catch(error=>{
-                        console.log(error)
-                        swal({
-                          title: "invalid username or password",
-                          text: "You clicked the button!",
-                          icon: "warning",
-                        });
-                    })
-            
-            }
-        }
-    
-
-    
-    if(localStorage.getItem("sid")){
-    return( <Redirect to="/student"/> )
-    }
-
-else if(localStorage.getItem("userinfo")){
-    return( <Redirect to="/admin/view"/> )
-    }
+      }
     
     return (
       <div className="app">
@@ -75,11 +56,11 @@ else if(localStorage.getItem("userinfo")){
             <h1  align="center" >STUDENT LOGIN</h1>
             
             <div className="m">
-                <label htmlFor=""className="username">Username</label>
+                <label htmlFor=""className="username">Email</label>
                 <input onChange={(event) =>{
-                    setSid(event.target.value)
+                    setUserEmail(event.target.value)
                 }}
-                 type="text" className="form-control" placeholder="Enter student id" />
+                 type="text" className="form-control" placeholder="Enter Email" />
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="u_password">Password</label>
@@ -90,7 +71,7 @@ else if(localStorage.getItem("userinfo")){
             </div>
 
             <div className="mb-3" align="center">
-                <button className="btn btn-primary " id="si" onClick={validateUser} >sign in</button>
+                <button className="btn btn-primary " id="si" onClick={(e)=>{handleSubmit(e)}} >sign in</button>
 
                 
 

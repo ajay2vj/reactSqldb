@@ -60,7 +60,7 @@ const AttandanceReport = () => {
     { name: 'Absent', value: attandance[1],color:"danger"},
   ];
   const COLORS = ['#5cb85c', '#bb2124'];
-  if(!localStorage.getItem("userinfo")){
+  if(!localStorage.getItem("user")){
     alert("please login first")
     return( <Redirect to="/"/> )
 }

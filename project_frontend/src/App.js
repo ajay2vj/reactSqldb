@@ -36,7 +36,7 @@ import StudentAttendance from './pages/studentAttendance';
 import AddAttendance from './pages/studentAttendance/attendance';
 function App() {
   const logout =()=>{
-    localStorage.removeItem("userinfo");
+    localStorage.removeItem("user");
   }
 return ( 
   <div className="App">

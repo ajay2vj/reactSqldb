@@ -9,59 +9,50 @@ import {Redirect} from "react-router-dom"
 
 const Signin = () =>{
     
-    const [username , setUsername] = useState('')
-    const [password , setPassword] = useState('')
+    const [Email , setUsername] = useState()
+    const [Password , setPassword] = useState()
 
     const history = useHistory()
     
 
  
 
-    const validateUser = () =>{
-        if(username.length === 0){
-            alert("enter your username")
+    async function loginUser(credentials) {
+        return fetch('http://localhost:53535/api/AdminLogin', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(credentials)
+        })
+          .then(data => data.json())
+       }
+       const handleSubmit = async e => {
+        e.preventDefault();
+        const response = await loginUser({
+          Email,
+          Password
+        });
+        if ('tokenSuccess' in response) {
+          swal("Success", response.result, "success", {
+            buttons: false,
+            timer: 2000,
+          })
+          .then((value) => {
+            localStorage.setItem('tokenSuccess', response['tokenSuccess']);
+            localStorage.setItem('user', JSON.stringify(response['user']));
+            history.push('/admin/view')
+          });
+        } else {
+          swal("Failed", response.result, "error");
         }
-        else if(password.length === 0){
-            alert("enter your password")
-        }
-        else{
-            const data = {
-                "username":username,
-                "password":password
-            }
-            axios.post("http://localhost:8080/api/admins/login", data).then((response)=>{
-                console.log(data)
-                const result = response.data
-                console.log(result)
-                if(result.token=== '123456'){
-                    swal({
-                        title: "Admin loginSuccesfull",
-                        text: "You clicked the button!",
-                        icon: "success",
-                      });           
-                        
-                        localStorage.setItem("userinfo", result.username )
-                        history.push('/admin/view')
-                    }
-                    })
-                    .catch(error=>{
-                        console.log(error)
-                        swal({
-                          title: "invalid username or password",
-                          text: "You clicked the button!",
-                          icon: "warning",
-                        });
-                    })
-            
-            }
-        
-        }
+      }
 
         if(localStorage.getItem("sid")){
             return( <Redirect to="/student"/> )
             }
         
-        else if(localStorage.getItem("userinfo")){
+        else if(localStorage.getItem("user")){
             return( <Redirect to="/admin/view"/> )
             }
             
@@ -73,11 +64,11 @@ const Signin = () =>{
             <h1  align="center" >ADMIN LOGIN</h1>
             
             <div className="m">
-                <label htmlFor=""className="username">Username</label>
+                <label htmlFor=""className="username">Email</label>
                 <input onChange={(event) =>{
                     setUsername(event.target.value)
                 }}
-                 type="text" className="form-control" placeholder="Enter username" />
+                 type="text" className="form-control" placeholder="Enter Email" />
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="u_password">Password</label>
@@ -88,7 +79,7 @@ const Signin = () =>{
             </div>
 
             <div className="mb-3" align="center">
-                <button className="btn btn-primary " id="si" onClick={validateUser} >sign in</button>
+                <button className="btn btn-primary " id="si" onClick={(e)=>handleSubmit(e)} >sign in</button>
 
                 
 

@@ -7,7 +7,7 @@ import  '../style.css';
 
 const AdminPassword = () => {
  const[password,setPassword]=useState('');
- const username =(localStorage.getItem('userinfo'));
+ const username =(localStorage.getItem('user'));
  const history = useHistory();
  const validateUser = () =>{
   if(password.length <= 3){
@@ -41,7 +41,7 @@ const AdminPassword = () => {
       }
   
   }
-  if(!localStorage.getItem("userinfo")){
+  if(!localStorage.getItem("user")){
     alert("please login first")
     return( <Redirect to="/"/> )
   }

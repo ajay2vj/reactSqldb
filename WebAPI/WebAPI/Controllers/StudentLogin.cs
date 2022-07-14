@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
 
             if (table?.Rows?.Count > 0)
             {
-                return new JsonResult(new { result = "Successfully Logged In", user = dep.Email + ',' + dep.Password, tokenSuccess = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI19jk" });
+                return new JsonResult(new { result = "Successfully Logged In", Sid = dep.Email + ',' + dep.Password, tokenSuccess = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI19jk" });
             }
             else
             {
