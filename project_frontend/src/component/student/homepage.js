@@ -1,35 +1,35 @@
 import React from "react";
-import style from "../style.css"
+// import style from "../style.css"
 import Button from 'react-bootstrap/Button'
-import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import studentService from '../../services/studentservice';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+// import studentService from '../../services/studentservice';
 import {Redirect} from "react-router-dom";
 
 
 export function Homepage() {
-  const [student, setStudent] = useState([]);
-  const sid =(localStorage.getItem('sid'));
+  const [student] = useState([]);
+  // const sid =(localStorage.getItem('sid'));
   
   const logout =()=>{
     localStorage.removeItem("sid");
     localStorage.removeItem("tokenSuccess");
   }
   
-  const init = () => {
-    studentService.getdetail(sid)
-      .then(response => {
-        console.log('Printing student data', response.data);
-        setStudent(response.data);
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      }) 
-  }
-  useEffect(() => {
-      init();
+  // const init = () => {
+  //   studentService.getdetail(sid)
+  //     .then(response => {
+  //       console.log('Printing student data', response.data);
+  //       setStudent(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     }) 
+  // }
+  // useEffect(() => {
+  //     init();
      
-   }, []);
+  //  }, []);
   let mystyle={
     minHeight:"90vh"
 }
@@ -50,9 +50,9 @@ if(!localStorage.getItem("sid")){
   <h2><a className="ul" href="/student/view" align="center">Student Details</a></h2>
   </Button>
   <br/>
-  <Button variant="info" size="lg">
+  {/* <Button variant="info" size="lg">
   <h2><a className="ul" href="/student/attandance" align="center"> Attendance</a></h2>
-  </Button>
+  </Button> */}
   <br/>
   <Button variant="success" size="lg">
   <h2><a className="ul" href="/student/result" align="center"> Result</a></h2>

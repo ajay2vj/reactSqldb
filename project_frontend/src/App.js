@@ -1,5 +1,5 @@
 import './App.css';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import React from 'react';
 import { BrowserRouter as Router,Switch,Route} from "react-router-dom";
 import Footer from './component/header-footer/Footer';
@@ -34,10 +34,14 @@ import StudentFee from './pages/studentFee';
 import AddFees from './pages/studentFee/addFees';
 import StudentAttendance from './pages/studentAttendance';
 import AddAttendance from './pages/studentAttendance/attendance';
+import Teacher from './pages/teacher';
+import AddTeacher from './pages/teacher/addTeacher';
+import Course from './pages/course';
+import AddCourse from './pages/course/addCourse';
 function App() {
-  const logout =()=>{
-    localStorage.removeItem("user");
-  }
+  // const logout =()=>{
+  //   localStorage.removeItem("user");
+  // }
 return ( 
   <div className="App">
      <React.Fragment>
@@ -75,6 +79,10 @@ return (
          <Route path="/add-fee"component={AddFees}/>
          <Route path="/student-attendance"component={StudentAttendance}/>
          <Route path="/add-attendance"component={AddAttendance}/>
+         <Route path="/teacher"component={Teacher}/>
+         <Route path="/add-teacher"component={AddTeacher}/>
+         <Route path="/course"component={Course}/>
+         <Route path="/add-course"component={AddCourse}/>
          <Route path="*" component={NotFound} />
     </Switch> 
       

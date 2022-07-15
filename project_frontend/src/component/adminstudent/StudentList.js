@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import studentService from '../../services/studentservice';
+// import studentService from '../../services/studentservice';
 // import resultService from '../../services/resultservice';
 // import attandanceService from '../../services/attandanceservice';
 // import  swal from 'sweetalert';
@@ -13,23 +13,27 @@ const StudentList = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("tokenSuccess");
   }
-  const init = () => {
-    studentService.getAll()
-      .then(response => {
-        console.log('Printing student data', response.data);
-        // setStudent(response.data);
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      }) 
-  }
-  let mystyle={
-    minHeight:"90vh"
-}
+//   const init = () => {
+//     studentService.getAll()
+//       .then(response => {
+//         console.log('Printing student data', response.data);
+//         // setStudent(response.data);
+//       })
+//       .catch(error => {
+//         console.log('Something went wrong', error);
+//       }) 
+//   }
+//   let mystyle={
+//     minHeight:"90vh"
+// }
 
-  useEffect(() => {
-    init();
-  }, []);
+//   useEffect(() => {
+//     init();
+//   }, []);
+
+let mystyle={
+      minHeight:"90vh"
+  }
 
   // const handleDelete = (id) => {
   //   console.log('Printing id', id);
@@ -91,6 +95,8 @@ const StudentList = () => {
       <h2 align="center">List of Students</h2>
       <hr/>
       <div>
+        <Link to="/teacher" className="btn btn-primary mb-2">Add Teacher</Link>{' '}
+        <Link to="/course" className="btn btn-primary mb-2">Add Course</Link>{' '}
         <Link to="/student-add" className="btn btn-primary mb-2">Add Student</Link>{' '}
         <Link to="/admin/viewtransfer" className="btn btn-info mb-2">View transfer Student </Link>{' '}
         <Link to="/student-attendance" className="btn btn-primary mb-2">Student Attandance</Link>{' '}
