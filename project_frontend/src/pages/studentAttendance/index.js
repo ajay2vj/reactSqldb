@@ -18,9 +18,13 @@ export default function StudentAttendance(){
     })
     
     const dataList = res?.data?.map((item, index)=>({
-      AtDate: item?.Atdate,
+      studentId: item?.Sid,
+      name: item?.Name,
+      class: item?.Class,
+      fromDate: item?.fromDate,
+      toDate: item?.toDate,
       status: item?.Status,
-      Id: item?.Sid
+      Id: item?.id
     }))
     return dataList;
   }
@@ -41,8 +45,24 @@ export default function StudentAttendance(){
   }
   const columns = [
     {
-      title: 'Attendance Date',
-      dataIndex: 'AtDate',
+      title: 'Student Id',
+      dataIndex: 'studentId',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Class',
+      dataIndex: 'class',
+    },
+    {
+      title: 'Start',
+      dataIndex: 'fromDate',
+    },
+    {
+      title: 'End',
+      dataIndex: 'toDate',
     },
     {
       title: 'Status',

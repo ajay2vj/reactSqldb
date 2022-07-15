@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select Atdate, Status, Sid from dbo.studentAttendance";
+                    select Name, Class, fromDate, toDate, Status, Sid, id from dbo.studentAttendance";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
         public JsonResult Post(Attendance dep)
         {
             string query = @"
-                    insert into dbo.studentAttendance(Atdate, Status) values('" + dep.Atdate + @"', '" + dep.Status + @"')";
+                    insert into dbo.studentAttendance(fromDate, toDate, Class, Name, Sid, Status) values('" + dep.fromDate + @"', '" + dep.toDate + @"', '" + dep.Class + @"', '" + dep.Name + @"','" + dep.Sid + @"', '" + dep.Status + @"')";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -77,9 +77,13 @@ namespace WebAPI.Controllers
         {
             string query = @"
                     update dbo.studentAttendance set 
-                    Atdate = '" + dep.Atdate + @"',
+                    fromDate = '" + dep.fromDate + @"',
+                    toDate = '" + dep.toDate + @"',
+                    CLass = '" + dep.Class + @"',
+                    Name = '" + dep.Name + @"',
+                    Sid = '" + dep.Sid + @"',
                     Status = '" + dep.Status + @"'
-                    where Sid = " + dep.Sid + @"
+                    where id = " + dep.id + @"
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
@@ -106,7 +110,7 @@ namespace WebAPI.Controllers
         {
             string query = @"
                     delete from dbo.studentAttendance
-                    where Sid = " + id + @" 
+                    where id = " + id + @" 
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");

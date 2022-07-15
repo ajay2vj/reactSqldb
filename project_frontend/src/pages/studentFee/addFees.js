@@ -5,6 +5,9 @@ import { useHistory } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 
 export default function AddFees(){
+    const [Name, setName] = useState();
+    const [Class, setClass] = useState();
+    const [Sid, setSid] = useState();
     const [FeeAmount, setFeeAmount] = useState();
     const [Status, setStatus] = useState();
     const queryClient = useQueryClient()
@@ -22,6 +25,9 @@ export default function AddFees(){
     const dataSubmit = async() => {
       try{
        await createStudent({
+        Name,
+        Class,
+        Sid,
         FeeAmount,
         Status
        });
@@ -51,6 +57,30 @@ export default function AddFees(){
             }}
             autoComplete="off"
           >
+            <Form.Item
+              label="Name"
+              name="name"
+            >
+              <Input 
+                onChange={(e)=> setName(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Class"
+              name="class"
+            >
+              <Input 
+                onChange={(e)=> setClass(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Student Id"
+              name="sid"
+            >
+              <Input 
+                onChange={(e)=> setSid(e.target.value)}
+              />
+            </Form.Item>
             <Form.Item
               label="Amount"
               name="amount"

@@ -17,9 +17,12 @@ export default function StudentFee(){
       },
     })
     const dataList = res?.data?.map((item, index)=>({
+      name: item?.Name,
+      class: item?.Class,
+      studentId: item?.Sid,
       feeAmount: item?.FeeAmount,
       status: item?.Status,
-      Id: item?.Sid
+      Id: item?.id
     }))
     return dataList;
   }
@@ -39,6 +42,18 @@ export default function StudentFee(){
     queryClient.invalidateQueries('fetchStudentFees', { exact: true })
   }
   const columns = [
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'Class',
+      dataIndex: 'class',
+    },
+    {
+      title: 'Student Id',
+      dataIndex: 'studentId',
+    },
     {
       title: 'Amount',
       dataIndex: 'feeAmount',

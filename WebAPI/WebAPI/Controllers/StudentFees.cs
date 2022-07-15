@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select FeeAmount, Status, Sid from dbo.studentFees";
+                    select Name, Class, FeeAmount, Status, Sid, id from dbo.studentFees";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
         public JsonResult Post(Fees dep)
         {
             string query = @"
-                    insert into dbo.studentFees(FeeAmount, Status) values('" + dep.FeeAmount + @"', '" + dep.Status + @"')";
+                    insert into dbo.studentFees(Name, CLass, Sid, FeeAmount, Status) values('" + dep.Name + @"', '" + dep.Class + @"', '" + dep.Sid + @"', '" + dep.FeeAmount + @"', '" + dep.Status + @"')";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -77,9 +77,12 @@ namespace WebAPI.Controllers
         {
             string query = @"
                     update dbo.studentFees set 
+                    Name = '" + dep.Name + @"',
+                    Class = '" + dep.Class + @"',
+                    Sid = '" + dep.Sid + @"',
                     FeeAmount = '" + dep.FeeAmount + @"',
                     Status = '" + dep.Status + @"'
-                    where Sid = " + dep.Sid + @"
+                    where id = " + dep.id + @"
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
@@ -106,7 +109,7 @@ namespace WebAPI.Controllers
         {
             string query = @"
                     delete from dbo.studentFees
-                    where Sid = " + id + @" 
+                    where id = " + id + @" 
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");

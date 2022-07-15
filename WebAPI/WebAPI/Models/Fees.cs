@@ -8,10 +8,13 @@ namespace WebAPI.Models
     public class Fees
     {
 
-        
+        public string Sid { get; set; }
+        public string Name { get; set; }
+        public string Class { get; set; }
+
         public string FeeAmount { get; set; }
         public string Status { get; set; }
-        public int Sid { get; set; }
+        public int id { get; set; }
 
 
     }

@@ -9,9 +9,15 @@ namespace WebAPI.Models
     {
 
 
-        public string Atdate { get; set; }
+        public string Name { get; set; }
+        public string Class { get; set; }
+        public string fromDate { get; set; }
+        public string toDate { get; set; }
+
         public string Status { get; set; }
-        public int Sid { get; set; }
+        public string Sid { get; set; }
+        public int id { get; set; }
+
 
 
     }

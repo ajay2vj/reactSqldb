@@ -5,7 +5,11 @@ import { useHistory, Redirect } from 'react-router-dom';
 import moment from 'moment';
 
 export default function AddAttendance(){
-    const [Atdate, setAtdate] = useState();
+    const [fromDate, setStartDate] = useState();
+    const [toDate, setEndDate] = useState();
+    const [Class, setClass] = useState();
+    const [Name, setName] = useState();
+    const [Sid, setSid] = useState();
     const [Status, setStatus] = useState();
     const queryClient = useQueryClient()
     let history = useHistory();
@@ -22,7 +26,11 @@ export default function AddAttendance(){
     const dataSubmit = async() => {
       try{
        await createStudentAttendance({
-        Atdate,
+        Name,
+        Class,
+        Sid,
+        fromDate,
+        toDate,
         Status
        });
       }catch(error){
@@ -33,9 +41,12 @@ export default function AddAttendance(){
          history.push('/student-attendance');
       }
    }
-   const attendanceDate = (date) =>{
-    setAtdate(moment(date?._d).format('MM-YYYY-DD h:mm:ss a'));
-  }
+   const startOnchange = (date) =>{
+    setStartDate(moment(date?._d).format('MM-YYYY-DD'));
+   }
+   const endOnchange = (date) =>{
+    setEndDate(moment(date?._d).format('MM-YYYY-DD'));
+   }
   if(!localStorage.getItem("user")){
     alert("please login first")
     return( <Redirect to="/"/> )
@@ -52,11 +63,43 @@ export default function AddAttendance(){
             autoComplete="off"
           >
             <Form.Item
-              label="Attendance Date"
-              name="atdate"
+              label="Name"
+              name="name"
+            >
+              <Input 
+                onChange={(e)=> setName(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Class"
+              name="class"
+            >
+              <Input 
+                onChange={(e)=> setClass(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Student Id"
+              name="sid"
+            >
+              <Input 
+                onChange={(e)=> setSid(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item
+              label="Start Date"
+              name="start"
             >
               <DatePicker 
-                onChange={attendanceDate}
+                onChange={startOnchange}
+              />
+            </Form.Item>
+            <Form.Item
+              label="End Date"
+              name="end"
+            >
+              <DatePicker 
+                onChange={endOnchange}
               />
             </Form.Item>
             <Form.Item
