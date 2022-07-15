@@ -23,17 +23,17 @@ export default function Header(props) {
               <li className="nav-item">
                 <Link className="nav-link" to="/about">About</Link>
               </li>  
-               <li className = "nav-item">
+               {/* <li className = "nav-item">
                  <Link className = "nav-link"to = "/fee" > Fee Struture </Link> 
-                </li>
+                </li> */}
                 
                 <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <Link className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                   Login
-                                </a>
+                                </Link>
                                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a className="dropdown-item" href="/loginstudent">Student Login</a></li>
-                                    <li><a className="dropdown-item" href="/loginadmin">Admin Login</a></li>
+                                    <li><Link className="dropdown-item" to="/loginstudent">Student Login</Link></li>
+                                    <li><Link className="dropdown-item" to="/loginadmin">Admin Login</Link></li>
                                     
                                 </ul>
                             </li>

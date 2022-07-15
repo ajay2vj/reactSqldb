@@ -98,10 +98,11 @@ let mystyle={
         <Link to="/teacher" className="btn btn-primary mb-2">Add Teacher</Link>{' '}
         <Link to="/course" className="btn btn-primary mb-2">Add Course</Link>{' '}
         <Link to="/student-add" className="btn btn-primary mb-2">Add Student</Link>{' '}
-        <Link to="/admin/viewtransfer" className="btn btn-info mb-2">View transfer Student </Link>{' '}
+        {/* <Link to="/admin/viewtransfer" className="btn btn-info mb-2">View transfer Student </Link>{' '} */}
         <Link to="/student-attendance" className="btn btn-primary mb-2">Student Attandance</Link>{' '}
         <Link to="/student-fee" className="btn btn-primary mb-2">Student Fees</Link>{' '}
-        <Link to="/admin/changepassword" className="btn btn-info mb-2">Change Password</Link>{' '}
+        <Link to="/view-marks" className="btn btn-primary mb-2">View Marks</Link>{' '}
+        {/* <Link to="/admin/changepassword" className="btn btn-info mb-2">Change Password</Link>{' '} */}
         <Link to="/"onClick={logout} className="btn btn-primary mb-2">logout</Link>
         {/* <table className="table table-bordered table-striped">
           <thead className="thead-dark" >
