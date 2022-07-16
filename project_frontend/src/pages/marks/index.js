@@ -72,41 +72,41 @@ export default function Viewmark(){
   }
   return(
     <>
-    <Modal 
-      title="View Mark"
-      visible={showModal} 
-      onOk={handleOk} 
-      onCancel={handleCancel}
-    >
-        <Column>
-          <div className='font-bold'>Student ID</div>
-          <div className='font-bold'>Register Id</div>
-          <div className='font-bold'>Subject</div>
-          <div className='font-bold'>Mark</div>
-          <div>{viewData?.studentId}</div>
-          <div>{viewData?.registerId}</div>
-          <div>{viewData?.subject}</div>
-          <div>{viewData?.mark}</div>
-        </Column>
-    </Modal>
-    <div className='p-40'>
-      <div className='flex justify-between'>
-        <h3>Mark List</h3>
-        <div className='flex gap-4'>
-          <Button 
-            type="primary" 
-            className='mb-2'
-            onClick={()=> {}}
-          >
-            <Link to={'/admin/view'}>Back</Link>
-          </Button>
+      <Modal 
+        title="View Mark"
+        visible={showModal} 
+        onOk={handleOk} 
+        onCancel={handleCancel}
+      >
+          <Column>
+            <div className='font-bold'>Student ID</div>
+            <div className='font-bold'>Register Id</div>
+            <div className='font-bold'>Subject</div>
+            <div className='font-bold'>Mark</div>
+            <div>{viewData?.studentId}</div>
+            <div>{viewData?.registerId}</div>
+            <div>{viewData?.subject}</div>
+            <div>{viewData?.mark}</div>
+          </Column>
+      </Modal>
+      <div className='p-40'>
+        <div className='flex justify-between'>
+          <h3>Mark List</h3>
+          <div className='flex gap-4'>
+            <Button 
+              type="primary" 
+              className='mb-2'
+              onClick={()=> {}}
+            >
+              <Link to={'/admin/view'}>Back</Link>
+            </Button>
+          </div>
         </div>
+        <Table
+          columns={columns}
+          dataSource={data}
+        />
       </div>
-      <Table
-        columns={columns}
-        dataSource={data}
-      />
-    </div>
     </>
   )
 }
