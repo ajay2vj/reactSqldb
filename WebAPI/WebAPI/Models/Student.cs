@@ -12,17 +12,19 @@ namespace WebAPI.Models
 
         public string StudentName { get; set; }
         public string Gender { get; set; }
-        public DateTime DOB { get; set; }
+        public string DOB { get; set; }
         public string Fathername { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
         public string Pincode { get; set; }
         public string Classes { get; set; }
-        public DateTime Admissiondate { get; set; }
-        public int FeeAmount { get; set; }
+        public string Admissiondate { get; set; }
+        public string FeeAmount { get; set; }
 
         public string Passcode { get; set; }
+
+        public string Sid { get; set; }
 
 
 

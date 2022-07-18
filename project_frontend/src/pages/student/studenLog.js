@@ -5,7 +5,7 @@ import { useQuery, useQueryClient } from 'react-query'
 import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default function Student(){
+export default function StudentLog(){
   const [showModal, setShowModal] = useState(false)
   const [viewData, setViewData] = useState()
   const queryClient = useQueryClient()
@@ -19,8 +19,10 @@ export default function Student(){
         'Access-Control-Allow-Credentials': true
       },
     })
-    const dataList = res?.data?.map((item, index)=>({
+    const loggedInUser = localStorage.getItem('sid')
+    const dataList = res?.data?.filter((item, index)=> item?.Sid === JSON.parse(loggedInUser)).map((item, index)=>({
       studentName: item?.StudentName,
+      studentId: item?.Sid,
       gender: item?.Gender,
       dob: item?.DOB,
       fName: item?.FatherName,
@@ -97,14 +99,14 @@ export default function Student(){
       data?.length >= 1 ? (
         <div className='flex gap-3'>
           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record?.Id)}>
-            <Button>Delete</Button>
+            <Button style={{display: 'none'}}>Delete</Button>
           </Popconfirm>
           {pathName === '/student/view' ? <Button onClick={() => handleView(record)}>View</Button>: null}
         </div>
       ) : null,
     },
   ];
-  if(!localStorage.getItem("user")){
+  if(!localStorage.getItem("sid")){
     alert("please login first")
     return( <Redirect to="/"/> )
   }
@@ -120,6 +122,7 @@ export default function Student(){
       >
         <Column>
           <div>
+            <div className='font-bold'>Student Id</div>
             <div className='font-bold'>Student Name</div>
             <div className='font-bold'>Classes</div>
             <div className='font-bold'>Gender</div>
@@ -133,6 +136,7 @@ export default function Student(){
             <div className='font-bold'>AD Date</div>
           </div>
           <div>
+            <div>{viewData?.studentId}</div>
             <div>{viewData?.studentName}</div>
             <div>{viewData?.Classes}</div>
             <div>{viewData?.gender}</div>

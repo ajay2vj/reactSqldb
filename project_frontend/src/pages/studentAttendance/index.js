@@ -58,6 +58,7 @@ export default function StudentAttendance(){
   const handleCancel = () => {
     setShowModal(false);
   };
+  const pathName = window.location.pathname;
 
   const columns = [
     {
@@ -93,7 +94,7 @@ export default function StudentAttendance(){
           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record?.Id)}>
             <Button>Delete</Button>
           </Popconfirm>
-          <Button onClick={() => handleView(record)}>View</Button>
+          {pathName === '/student/view' ? <Button onClick={() => handleView(record)}>View</Button>: null}
         </div>
       ) : null,
     },

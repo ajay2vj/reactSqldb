@@ -25,7 +25,8 @@ export default function Viewmark(){
         'Access-Control-Allow-Credentials': true
       },
     })
-    const dataList = res?.data?.map((item, index)=>({
+    const loggedInUser = localStorage.getItem('sid')
+    const dataList = res?.data?.filter((item, index)=> item?.Sid === JSON.parse(loggedInUser)).map((item, index)=>({
       studentId: item?.Sid,
       registerId: item?.registerId,
       subject: item?.subject,
@@ -66,7 +67,7 @@ export default function Viewmark(){
       ) : null,
     },
   ];
-  if(!localStorage.getItem("user")){
+  if(!localStorage.getItem("sid")){
     alert("please login first")
     return( <Redirect to="/"/> )
   }
@@ -98,7 +99,7 @@ export default function Viewmark(){
               className='mb-2'
               onClick={()=> {}}
             >
-              <Link to={'/admin/view'}>Back</Link>
+              <Link to={'/student'}>Back</Link>
             </Button>
           </div>
         </div>

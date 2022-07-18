@@ -25,7 +25,7 @@ namespace WebAPI.Controllers
         [HttpPost]
         public JsonResult Post(Admin dep)
         {
-            string query = @"select Email, Password from dbo.StudentLogin where Email='" + dep.Email + @"' and Password='" + dep.Password + @"'";
+            string query = @"select Sid, Passcode from dbo.studentDetails where Sid='" + dep.Sid + @"' and Passcode='" + dep.Password + @"'";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
 
             if (table?.Rows?.Count > 0)
             {
-                return new JsonResult(new { result = "Successfully Logged In", Sid = dep.Email + ',' + dep.Password, tokenSuccess = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI19jk" });
+                return new JsonResult(new { result = "Successfully Logged In", Sid = dep.Sid, tokenSuccess = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI19jk" });
             }
             else
             {

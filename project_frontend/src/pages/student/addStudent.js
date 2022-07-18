@@ -6,6 +6,7 @@ import { useHistory, Redirect } from 'react-router-dom';
 
 export default function StudentAdd(){
     const [StudentName, setStudent] = useState();
+    const [Sid, setStudentId] = useState();
     const [Gender, setGender] = useState();
     const [DOB, setDOB] = useState();
     const [FatherName, setFname] = useState();
@@ -43,7 +44,8 @@ export default function StudentAdd(){
         Classes,
         Admissiondate,
         FeeAmount,
-        Passcode
+        Passcode,
+        Sid
        });
       }catch(error){
          // console.log(error)
@@ -84,6 +86,12 @@ export default function StudentAdd(){
               <Input 
                 onChange={(e)=> setStudent(e.target.value)}
               />
+            </Form.Item>
+            <Form.Item
+              label="Student Id"
+              name="Sid"
+            >
+              <Input onChange={(e)=> setStudentId(e.target.value)}/>
             </Form.Item>
             <Form.Item
               label="Gender"

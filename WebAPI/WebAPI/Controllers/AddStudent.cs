@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select Id, StudentName, Gender, DOB, FatherName, Mobile, Email, Address, Pincode, Classes, Admissiondate, FeeAmount, Passcode from dbo.studentDetails";
+                    select Id, StudentName, Gender, DOB, FatherName, Mobile, Email, Address, Pincode, Classes, Admissiondate, FeeAmount, Passcode, Sid from dbo.studentDetails";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
             SqlDataReader myReader;
@@ -64,7 +64,8 @@ namespace WebAPI.Controllers
                         Classes,
                         Admissiondate,
                         FeeAmount,
-                        Passcode
+                        Passcode,
+                        Sid
                     ) values
                         (
                             '" + dep.StudentName + @"', 
@@ -78,7 +79,8 @@ namespace WebAPI.Controllers
                             '" + dep.Classes + @"',
                             '" + dep.Admissiondate + @"',
                             '" + dep.FeeAmount + @"',
-                            '" + dep.Passcode + @"'
+                            '" + dep.Passcode + @"',
+                            '" + dep.Sid + @"'
                         )";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("StudentAppCon");
@@ -105,6 +107,7 @@ namespace WebAPI.Controllers
         {
             string query = @"
                     update dbo.studentDetails set 
+                    Sid = '"+dep.Sid+@"',
                     StudentName = '"+dep.StudentName + @"',
                     Gender = '" + dep.Gender + @"',
                     DOB = '" + dep.DOB + @"',
@@ -112,7 +115,7 @@ namespace WebAPI.Controllers
                     Mobile = '" + dep.Mobile + @"',
                     Email = '" + dep.Email + @"',
                     Address = '" + dep.Address + @"',
-                    Pincode = '" + dep.Pincode + @"',
+                    Pincode = '" + dep.Pincode + @"', 
                     Classes = '" + dep.Classes + @"',
                     Admissiondate = '" + dep.Admissiondate + @"',
                     FeeAmount = '" + dep.FeeAmount + @"',

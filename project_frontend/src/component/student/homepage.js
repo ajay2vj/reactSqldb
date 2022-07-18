@@ -50,16 +50,16 @@ if(!localStorage.getItem("sid")){
   <h2><a className="ul" href="/student/view" align="center">Student Details</a></h2>
   </Button>
   <br/>
-  {/* <Button variant="info" size="lg">
+  <Button variant="info" size="lg">
   <h2><a className="ul" href="/student/attandance" align="center"> Attendance</a></h2>
-  </Button> */}
+  </Button>
   <br/>
   <Button variant="success" size="lg">
-  <h2><a className="ul" href="/student/result" align="center"> Result</a></h2>
+  <h2><a className="ul" href="/student/marks" align="center"> Marks</a></h2>
   </Button>
   <br/>
   <Button variant="warning" size="lg">
-  <h2><a className="ul" href="/student/changepassword" align="center"> Change Password</a></h2>
+  <h2><a className="ul" href="/student/fees" align="center"> Fees</a></h2>
   </Button>
   <br/>
   

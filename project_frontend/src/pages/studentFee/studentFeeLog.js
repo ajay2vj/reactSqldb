@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { useQuery, useQueryClient } from 'react-query'
 import styled from 'styled-components'
 
-export default function StudentFee(){
+export default function StudentFeeLog(){
   const [showModal, setShowModal] = useState(false)
   const [viewData, setViewData] = useState()
   const queryClient = useQueryClient()
@@ -19,7 +19,8 @@ export default function StudentFee(){
         'Access-Control-Allow-Credentials': true
       },
     })
-    const dataList = res?.data?.map((item, index)=>({
+    const loggedInUser = localStorage.getItem('sid')
+    const dataList = res?.data?.filter((item, index)=> item?.Sid === JSON.parse(loggedInUser)).map((item, index)=>({
       name: item?.Name,
       class: item?.Class,
       studentId: item?.Sid,
@@ -56,7 +57,6 @@ export default function StudentFee(){
     setShowModal(false);
   };
 
-  const pathName = window.location.pathname;
 
   const columns = [
     {
@@ -86,17 +86,18 @@ export default function StudentFee(){
       data?.length >= 1 ? (
         <div className='flex gap-3'>
           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record?.Id)}>
-            <Button>Delete</Button>
+            <Button style={{display: 'none'}}>Delete</Button>
           </Popconfirm>
-          {pathName === '/student/view' ? <Button onClick={() => handleView(record)}>View</Button>: null}
+          <Button onClick={() => handleView(record)}>View</Button>
         </div>
       ) : null,
     },
   ];
-  if(!localStorage.getItem("user")){
+  if(!localStorage.getItem("sid")){
     alert("please login first")
     return( <Redirect to="/"/> )
   }
+  
   return(
     <>
       <Modal
@@ -129,14 +130,7 @@ export default function StudentFee(){
               className='mb-2'
               onClick={()=> {}}
             >
-              <Link to={'/admin/view'}>Back</Link>
-            </Button>
-            <Button 
-              type="primary" 
-              className='mb-2'
-              onClick={()=> {}}
-            >
-              <Link to={'add-fee'}>Add</Link>
+              <Link to={'/student'}>Back</Link>
             </Button>
           </div>
         </div>

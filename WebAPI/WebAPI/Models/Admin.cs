@@ -12,6 +12,8 @@ namespace WebAPI.Models
         public string Id { get; set; }
         public string Email { get; set; }
         public int Password { get; set; }
+        public string Sid { get; set; }
+
 
 
     }

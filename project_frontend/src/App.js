@@ -39,6 +39,7 @@ import AddTeacher from './pages/teacher/addTeacher';
 import Course from './pages/course';
 import AddCourse from './pages/course/addCourse';
 import Viewmark from './pages/marks';
+import StudentFeeLog from './pages/studentFee/studentFeeLog';
 function App() {
   // const logout =()=>{
   //   localStorage.removeItem("user");
@@ -84,7 +85,8 @@ return (
          <Route path="/add-teacher"component={AddTeacher}/>
          <Route path="/course"component={Course}/>
          <Route path="/add-course"component={AddCourse}/>
-         <Route path="/view-marks"component={Viewmark}/>
+         <Route path="/student/marks"component={Viewmark}/>
+         <Route path="/student/fees"component={StudentFeeLog}/>
          <Route path="*" component={NotFound} />
     </Switch> 
       

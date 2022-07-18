@@ -1,36 +1,38 @@
-import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import studentService from '../../services/studentservice';
+import React from 'react';
+import { Link } from 'react-router-dom';
+// import studentService from '../../services/studentservice';
 //import resultService from '../services/resultservice';
-import  swal from 'sweetalert';
+// import  swal from 'sweetalert';
 import {Redirect} from "react-router-dom"
+import Student from '../../pages/student/studenLog';
 const StudentHome = () => {
 //const studentid=this.state;
-  const [student, setStudent] = useState([]);
+  // const [, setStudent] = useState([]);
   //const [sid, setSid] = useState([]);
-  const sid =(localStorage.getItem('sid'));
-  const init = () => {
-    studentService.getView(sid)
-      .then(response => {
-        console.log('Printing student data', response.data);
-        setStudent(response.data);
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      }) 
-  }
+  // const sid =(localStorage.getItem('sid'));
+  // const init = () => {
+  //   studentService.getView(sid)
+  //     .then(response => {
+  //       console.log('Printing student data', response.data);
+  //       setStudent(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     }) 
+  // }
 
 
 
-  useEffect(() => {
- // const sid =(localStorage.getItem('sid'));
- // if (sid) {
-   //setSid(sid);}
-   init();
+//   useEffect(() => {
+//  // const sid =(localStorage.getItem('sid'));
+//  // if (sid) {
+//    //setSid(sid);}
+//    init();
   
-}, []);
+// }, []);
   const logout =()=>{
     localStorage.removeItem("sid");
+    localStorage.removeItem("tokenSuccess");
   }
   
   let mystyle={
@@ -41,9 +43,9 @@ const StudentHome = () => {
 
 
 
-useEffect(() => {
+// useEffect(() => {
   
-  }, []);
+//   }, []);
 
  
   if(!localStorage.getItem("sid")){
@@ -59,67 +61,7 @@ useEffect(() => {
         
    <div>
   <h3 align="center">Student Details</h3>
-  <table border="1" className="table table-bordered table-striped">
-    <tbody>
-  <tr>
-    <td> Student Id: </td>
-    <td>{student.sid}</td>
-    <td>
-      Status:
-    </td>
-    <td>{student.status}</td>
-   </tr>
-   <tr>
-     <td>
-       Name :
-     </td>
-     <td colSpan="3">
-       {student.name}
-       </td>
-   </tr>
-   <tr>
-    <td>Class : </td>
-    <td>{student.classes}</td>
-    <td>
-      Admission Date :
-    </td>
-    <td>{new Date(student.addmissiondate ).toLocaleDateString()}</td>
-   </tr>
-   <tr>
-    <td>Gender : </td>
-    <td>{student.gender}</td>
-    <td>
-       Date of Birth :
-    </td>
-    <td>{new Date(student.dob ).toLocaleDateString()}</td>
-   </tr>
-   <tr>
-    <td>Father Name : </td>
-    <td>{student.father_name}</td>
-    <td>
-      Mobile No :
-    </td>
-    <td>{student.mobile_no}</td>
-   </tr>
-   <tr>
-     <td>Email : </td>
-     <td colSpan="3">{student.emailid}</td>
-   </tr>
-
-   <tr>
-     <td>Address : </td>
-     <td colSpan="3">{student.address}</td>
-   </tr>
-   <tr>
-     <td>pincode : </td>
-     <td colSpan="3">{student.pincode}</td>
-   </tr>
-
-
-
-  </tbody>
- 
- </table>
+  <Student />
  </div>
       </div>
       <div align="center">

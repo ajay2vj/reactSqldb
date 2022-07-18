@@ -1,15 +1,15 @@
-import axios from "axios"
+// import axios from "axios"
 import { useState } from "react"
-import { Link , useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
 import  '../style.css';
-import {Redirect} from "react-router-dom";
+// import {Redirect} from "react-router-dom";
 import  swal from 'sweetalert';
 
 
 
 const Signin = () =>{
     
-    const [Email, setUserEmail] = useState();
+    const [Sid, setStudentId] = useState();
     const [Password, setPassword] = useState();
 
     const history = useHistory()
@@ -29,10 +29,9 @@ const Signin = () =>{
        const handleSubmit = async e => {
         e.preventDefault();
         const response = await loginUser({
-          Email,
+          Sid,
           Password
         });
-        console.log(response)
         if ('tokenSuccess' in response) {
           swal("Success", response.result, "success", {
             buttons: false,
@@ -56,11 +55,11 @@ const Signin = () =>{
             <h1  align="center" >STUDENT LOGIN</h1>
             
             <div className="m">
-                <label htmlFor=""className="username">Email</label>
+                <label htmlFor=""className="username">Student Id</label>
                 <input onChange={(event) =>{
-                    setUserEmail(event.target.value)
+                    setStudentId(event.target.value)
                 }}
-                 type="text" className="form-control" placeholder="Enter Email" />
+                 type="text" className="form-control" placeholder="Enter Student Id" />
             </div>
             <div className="mb-3">
                 <label htmlFor="" className="u_password">Password</label>

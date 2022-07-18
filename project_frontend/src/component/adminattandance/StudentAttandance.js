@@ -1,59 +1,59 @@
-import { useEffect, useState,useRef}  from 'react';
-import { Link, useHistory ,useParams} from 'react-router-dom';
-import attandanceService from '../../services/attandanceservice';
-import studentService from '../../services/studentservice';
-import  swal from 'sweetalert';
+import { useState,useRef}  from 'react';
+import { Link} from 'react-router-dom';
+// import attandanceService from '../../services/attandanceservice';
+// import studentService from '../../services/studentservice';
+// import  swal from 'sweetalert';
 import {Redirect} from "react-router-dom";
 import ReactToPrint from 'react-to-print';//print
 
 const AttandanceList = () => {
-  const [attandance, setAttandance] = useState([]);
-  const[student,setStudent]=useState('');
+  const [attandance, ] = useState([]);
+  const[student,]=useState('');
   const[startdate,setStartDate]=useState('');
   const[enddate,setEndDate]=useState('');
-  const {sid} = useParams();
+  // const {sid} = useParams();
   const componentRef = useRef();//print
-  const init1 = () => {
-    studentService.getdetail(sid)
-      .then(response => {
-        console.log('Printing student data', response.data);
-        setStudent(response.data);
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      }) 
-  }
+  // const init1 = () => {
+  //   studentService.getdetail(sid)
+  //     .then(response => {
+  //       console.log('Printing student data', response.data);
+  //       setStudent(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     }) 
+  // }
   let mystyle={
     minHeight:"90vh"
 }
 
 
-  const init = () => {
-    attandanceService.get(sid,`${startdate}`,`${enddate}`)
-      .then(response => {
-        console.log('Printing attandance data', response.data);
-        setAttandance(response.data);
-        if({startdate}>{enddate}){
-          swal({
-            title: "End date should be greater than start date",
-            text: "You clicked the button!",
-            icon: "warning",
-          });
-        }
+  // const init = () => {
+  //   attandanceService.get(sid,`${startdate}`,`${enddate}`)
+  //     .then(response => {
+  //       console.log('Printing attandance data', response.data);
+  //       setAttandance(response.data);
+  //       if({startdate}>{enddate}){
+  //         swal({
+  //           title: "End date should be greater than start date",
+  //           text: "You clicked the button!",
+  //           icon: "warning",
+  //         });
+  //       }
 
-      })
-      .catch(error => {
-        console.log('Something went wrong', error);
-      }) 
-  }
+  //     })
+  //     .catch(error => {
+  //       console.log('Something went wrong', error);
+  //     }) 
+  // }
 
 
  
 
 
-  useEffect(() => {
-    init1();
-  }, []);
+  // useEffect(() => {
+  //   init1();
+  // }, []);
 
   if(!localStorage.getItem("user")){
     alert("please login first")
@@ -89,7 +89,7 @@ return (
                         placeholder="Enter Admission Date"
                     />
                     {' '}
-     <button type="submit"onClick={(s) => init()} className="btn btn-primary" >sumbit</button>  
+     <button type="submit"onClick={()=>{}} className="btn btn-primary" >sumbit</button>  
      <div ref={componentRef}>
 <h2 align="center">Attandance</h2>  
 <div>

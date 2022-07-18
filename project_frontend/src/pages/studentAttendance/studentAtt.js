@@ -5,13 +5,13 @@ import { Link, Redirect } from 'react-router-dom'
 import { useQuery, useQueryClient } from 'react-query'
 import styled from 'styled-components'
 
-export default function StudentFee(){
+export default function StudentAttendanceLog(){
   const [showModal, setShowModal] = useState(false)
   const [viewData, setViewData] = useState()
   const queryClient = useQueryClient()
-  const fetchStudentFees = async () => {
+  const fetchStudentAttendance = async () => {
     const res = await axios({
-      url: 'http://localhost:53535/api/StudentFees',
+      url: 'http://localhost:53535/api/StudentAttendance',
       method: 'GET',
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -19,19 +19,21 @@ export default function StudentFee(){
         'Access-Control-Allow-Credentials': true
       },
     })
-    const dataList = res?.data?.map((item, index)=>({
+    const loggedInUser = localStorage.getItem('sid')
+    const dataList = res?.data?.filter((item, index)=> item?.Sid === JSON.parse(loggedInUser)).map((item, index)=>({
+      studentId: item?.Sid,
       name: item?.Name,
       class: item?.Class,
-      studentId: item?.Sid,
-      feeAmount: item?.FeeAmount,
+      fromDate: item?.fromDate,
+      toDate: item?.toDate,
       status: item?.Status,
       Id: item?.id
     }))
     return dataList;
   }
-  const { data } = useQuery('fetchStudentFees', fetchStudentFees)
+  const { data } = useQuery('fetchStudentAttendance', fetchStudentAttendance)
   async function deleteAPI(id) {
-    return fetch(`http://localhost:53535/api/StudentFees/${id}`, {
+    return fetch(`http://localhost:53535/api/StudentAttendance/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -42,8 +44,9 @@ export default function StudentFee(){
   }
   const handleDelete = async(key) => {
     await deleteAPI(key);
-    queryClient.invalidateQueries('fetchStudentFees', { exact: true })
+    queryClient.invalidateQueries('fetchStudentAttendance', { exact: true })
   }
+
   const handleView = async(key) => {
     setViewData(key)
     setShowModal(true)
@@ -56,9 +59,11 @@ export default function StudentFee(){
     setShowModal(false);
   };
 
-  const pathName = window.location.pathname;
-
   const columns = [
+    {
+      title: 'Student Id',
+      dataIndex: 'studentId',
+    },
     {
       title: 'Name',
       dataIndex: 'name',
@@ -68,12 +73,12 @@ export default function StudentFee(){
       dataIndex: 'class',
     },
     {
-      title: 'Student Id',
-      dataIndex: 'studentId',
+      title: 'Start',
+      dataIndex: 'fromDate',
     },
     {
-      title: 'Amount',
-      dataIndex: 'feeAmount',
+      title: 'End',
+      dataIndex: 'toDate',
     },
     {
       title: 'Status',
@@ -86,61 +91,67 @@ export default function StudentFee(){
       data?.length >= 1 ? (
         <div className='flex gap-3'>
           <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record?.Id)}>
-            <Button>Delete</Button>
+            <Button style={{display: 'none'}}>Delete</Button>
           </Popconfirm>
-          {pathName === '/student/view' ? <Button onClick={() => handleView(record)}>View</Button>: null}
+          <Button onClick={() => handleView(record)}>View</Button>
         </div>
       ) : null,
     },
   ];
-  if(!localStorage.getItem("user")){
+  if(!localStorage.getItem("sid")){
     alert("please login first")
     return( <Redirect to="/"/> )
   }
   return(
     <>
-      <Modal
-        title="View Fees"
+      <Modal 
+        title="View Attendance"
         visible={showModal} 
         onOk={handleOk} 
         onCancel={handleCancel}
         width={800}
         heigh={400}
       >
-        <Column>
-          <div className='font-bold'>Name</div>
-          <div className='font-bold'>Class</div>
-          <div className='font-bold'>Student ID</div>
-          <div className='font-bold'>Amount</div>
-          <div className='font-bold'>Status</div>
-          <div>{viewData?.name}</div>
-          <div>{viewData?.class}</div>
-          <div>{viewData?.studentId}</div>
-          <div>{viewData?.feeAmount}</div>
-          <div>{viewData?.status}</div>
-        </Column>
+          <Column>
+            <div className='font-bold'>Student ID</div>
+            <div className='font-bold'>Name</div>
+            <div className='font-bold'>Class</div>
+            <div className='font-bold'>Start</div>
+            <div className='font-bold'>End</div>
+            <div className='font-bold'>Status</div>
+            <div>{viewData?.studentId}</div>
+            <div>{viewData?.name}</div>
+            <div>{viewData?.class}</div>
+            <div>{viewData?.fromDate}</div>
+            <div>{viewData?.toDate}</div>
+            <div>{viewData?.status}</div>
+          </Column>
       </Modal>
       <div className='p-40'>
         <div className='flex justify-between'>
-          <h3>Student Fee List</h3>
+          <h3>Student Attendance</h3>
           <div className='flex gap-4'>
             <Button 
               type="primary" 
               className='mb-2'
               onClick={()=> {}}
             >
-              <Link to={'/admin/view'}>Back</Link>
+              <Link to={'/student'}>Back</Link>
             </Button>
-            <Button 
+            {/* <Button 
               type="primary" 
               className='mb-2'
               onClick={()=> {}}
             >
-              <Link to={'add-fee'}>Add</Link>
-            </Button>
+              <Link to={'add-attendance'}>Add</Link>
+            </Button> */}
           </div>
         </div>
         <Table
+          // rowSelection={{
+          //   type: selectionType,
+          //   ...rowSelection,
+          // }}
           columns={columns}
           dataSource={data}
         />
@@ -154,5 +165,5 @@ const Column = styled.div`
   padding: 10px 20px;
   display: grid;
   gap: 20px;
-  grid-template-columns: auto auto auto auto auto;
+  grid-template-columns: auto auto auto auto auto auto;
 `;
